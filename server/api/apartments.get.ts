@@ -17,8 +17,6 @@ export default defineEventHandler(async (event) => {
 
     let data = (await useStorage("db").getItem("data.json")) as Apartment[];
 
-
-
     if (rooms) {
         const roomsArray = safeParseArray(rooms);
         if(roomsArray && roomsArray.length) {
