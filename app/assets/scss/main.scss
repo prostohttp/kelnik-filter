@@ -1,0 +1,489 @@
+@use "_reset";
+@use "_colors" as *;
+
+@mixin list-flex {
+    display: flex;
+    gap: 20px;
+}
+
+@mixin gradient {
+    background: linear-gradient(135deg, rgba(174, 228, 178, 0.3) 0%, rgba(149, 208, 161, 0.3) 100%);
+}
+
+body {
+    color: $text_color;
+    font-family: "PT Root UI Regular" !important;
+    font-size: 16px;
+    font-weight: 400;
+
+    &::selection {
+        background-color: $text_accent_color;
+        color: #fff;
+    }
+}
+
+h1 {
+    font-family: "PT Root UI Bold";
+    font-size: 54px;
+    padding-bottom: 48px;
+
+    a {
+        color: $text_color;
+        text-decoration: none;
+    }
+}
+
+a,
+input,
+button {
+    outline-color: $text_accent_color;
+    transition: all 0.3s;
+}
+
+a:hover,
+a:active {
+    color: $text_accent_color;
+    transition: all 0.3s;
+}
+
+main {
+    max-width: 1480px;
+    margin: 0 auto;
+    padding: 96px 20px;
+}
+
+button {
+    font-family: "PT Root UI Regular";
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background-color: transparent;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.rounded {
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.opacity {
+    opacity: 0.5;
+}
+
+.apartments-list {
+    margin-bottom: 48px;
+}
+
+.base-button {
+    font-size: 16px;
+    font-family: "PT Root UI Medium";
+    padding: 10px 24px;
+    border-radius: 26px;
+    border: 1px solid #cdd1d8;
+
+    &:hover {
+        border-color: $text_accent_color;
+    }
+}
+
+.vertical-space {
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.circle-button {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: #fff;
+    color: $text_color;
+    font-size: 16px;
+
+    &-active {
+        color: #fff;
+        background-color: $accent_color;
+        box-shadow: 0 6px 20px 0 $green2;
+    }
+
+    &-disabled {
+        color: #c3c3c3;
+        cursor: default !important;
+    }
+}
+
+.scroll-button {
+    background-color: #86d49f;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 10;
+    right: 32px;
+    bottom: 32px;
+}
+
+.scroll-button-hidden {
+    right: -100px;
+}
+
+.clear-button {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    font-size: 14px;
+    color: #000;
+
+    &:hover {
+        color: $text_accent_color;
+
+        path {
+            fill: $text_accent_color;
+        }
+    }
+}
+
+.message {
+    width: 100%;
+    margin-bottom: 40px;
+    border-radius: 16px;
+    background-color: $text_accent_color;
+    text-align: center;
+    line-height: 22px;
+    padding: 15px;
+    color: #fff;
+
+    a {
+        font-family: "PT Root UI Bold";
+        color: #fff;
+    }
+}
+
+.list-wrapper {
+    @include list-flex;
+    padding-bottom: 17px;
+    border-bottom: 1px solid #e5e5e5;
+
+    &__image {
+        width: 10%;
+
+        & img {
+            object-fit: contain;
+        }
+    }
+
+    &__info {
+        @include list-flex;
+        width: 90%;
+
+        &-sort {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            cursor: pointer;
+
+            &-active {
+                color: $accent_color;
+            }
+        }
+
+        &-title {
+            width: 45%;
+        }
+
+        &-area {
+            margin-left: auto;
+            width: 15%;
+        }
+
+        &-floor {
+            width: 15%;
+        }
+
+        &-price {
+            width: 15%;
+        }
+    }
+}
+
+.list-item {
+    padding: 24px 0 33px 5px;
+    min-height: 80px;
+
+    &-title {
+        font-family: "PT Root UI Medium";
+    }
+}
+
+.sort-icon {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+
+    &-active {
+        fill: $accent_color !important;
+    }
+}
+
+.with-sidebar {
+    display: flex;
+    gap: 80px;
+    justify-content: space-between;
+
+    .content {
+        width: 70%;
+    }
+
+    .sidebar {
+        width: 30%;
+    }
+}
+
+.hidden-md {
+    display: flex;
+}
+
+.hidden-lg {
+    display: none;
+}
+
+.filter {
+    @include gradient;
+    border-radius: 16px;
+    padding: 40px;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+.filter-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    &__title {
+        font-size: 14px;
+    }
+}
+
+.slider-wrapper {
+    &__inputs {
+        display: flex;
+        margin-bottom: 10px;
+
+        &-container {
+            width: 50%;
+            position: relative;
+            height: 24px;
+
+            @mixin before {
+                position: absolute;
+                left: 0;
+                bottom: 3px;
+                color: $text_color;
+                opacity: 0.5;
+            }
+
+            &-left {
+                &::before {
+                    @include before;
+                    content: "от";
+                }
+            }
+
+            &-right {
+                &::before {
+                    @include before;
+                    content: "до";
+                }
+            }
+
+            &__field {
+                height: 24px;
+                border: none;
+                background-color: transparent;
+                box-shadow: none;
+                font-size: 16px;
+                font-family: "PT Root UI Medium";
+                padding-left: 23px;
+            }
+        }
+    }
+}
+
+.vue-slider {
+    padding-left: 5px !important;
+    padding-right: 5px !important;
+
+    &-dot {
+        padding: 10px;
+
+        &-handle {
+            box-shadow: none !important;
+            background-color: $accent_color !important;
+        }
+    }
+
+    &-process {
+        background-color: $accent_color !important;
+    }
+
+    &-rail {
+        background-color: #cae0d4 !important;
+    }
+}
+
+.rooms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+@keyframes pulse {
+    50% {
+        opacity: .5
+    }
+}
+
+.animate-pulse {
+    animation: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite
+}
+
+.placeholder {
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        background-color: #fff;
+        animation: pulse 2s cubic-bezier(.4, 0, .6, 1) infinite;
+        opacity: 0.3;
+        z-index: 100;
+    }
+}
+
+.image-placeholder {
+    overflow: hidden;
+    border-radius: 5px;
+}
+
+.loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+
+    &__indicator {
+        width: 70px;
+        height: 30px;
+    }
+}
+
+@keyframes gooey {
+    to {
+        transform: translate3d(230px, 0, 0);
+    }
+}
+
+.not-found {
+    text-align: center;
+    font-size: 22px;
+    font-family: 'PT Root UI Medium';
+    padding: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.ellipse:nth-child(1) {
+    animation: gooey 1s cubic-bezier(0.59, 0.8, 0.29, 0.1) infinite both alternate-reverse;
+    animation-delay: 0.3s;
+}
+
+@media screen and (max-width: 1440px) {
+    body {
+        font-size: 14px;
+    }
+
+    .with-sidebar {
+        gap: 28px;
+    }
+
+    .apartments-list {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        margin-bottom: 24px;
+    }
+
+    .hidden-md {
+        display: none;
+    }
+
+    .hidden-lg {
+        display: inline-flex;
+    }
+
+    .list-item {
+        padding: 16px 24px;
+        flex-direction: row-reverse;
+
+        &-title {
+            width: 100%;
+        }
+
+        &__image {
+            width: 20%;
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
+
+    .list-wrapper {
+        border: 1px solid #e5e5e5;
+        border-radius: 16px;
+
+        &__info {
+            flex-wrap: wrap;
+            row-gap: 0;
+
+            &-area {
+                margin-left: 0;
+                width: auto;
+            }
+
+            &-floor,
+            &-price {
+                width: auto;
+            }
+        }
+    }
+
+    .list-header {
+        border: none;
+    }
+}
