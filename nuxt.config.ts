@@ -12,16 +12,12 @@ export default defineNuxtConfig({
     }
   },
   css: ["~/assets/scss/main.scss"],
-  // routeRules: {
-  //   "/**": {
-  //     ssr: false,
-  //   },
-  // },
   serverDir: "app/server",
   dir: {
     public: "app/public"
   },
   nitro: {
+    preset: "node-server",
     storage: {
       db: {
         driver: "fs",
