@@ -17,7 +17,6 @@ export default defineNuxtConfig({
     public: "app/public"
   },
   nitro: {
-    preset: "node-server",
     storage: {
       db: {
         driver: "fs",
