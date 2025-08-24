@@ -431,6 +431,14 @@ button {
 
     .with-sidebar {
         gap: 28px;
+
+        .content {
+            width: 65%;
+        }
+
+        .sidebar {
+            width: 35%;
+        }
     }
 
     .apartments-list {

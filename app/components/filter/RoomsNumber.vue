@@ -68,5 +68,4 @@ onMounted(() => {
             {{ room }}к
         </button>
     </div>
-    <pre>{{ filterStore.apartmentsWithActiveRooms.length }}</pre>
 </template>

@@ -13,7 +13,7 @@ const props = defineProps<{
 const data = defineModel<Data>();
 
 const isEmptyData = computed(() => !data.value?.items.length && !props.isLoading);
-const loadMore = computed(() => page.value < data.value!.totalPages);
+const loadMore = computed(() => data.value && page.value < data.value.totalPages);
 const increasePageHandler = useDebounceFn(async () => {
     navigateTo({
         query: {
@@ -39,14 +39,13 @@ const increasePageHandler = useDebounceFn(async () => {
                 :key="apartment.id"
                 :apartment="apartment"
             />
-            <AppBaseButton
-                v-if="loadMore"
-                class="vertical-space"
-                @click="increasePageHandler"
-            >
-                Загрузить еще
-            </AppBaseButton>
         </div>
+        <AppBaseButton
+            v-if="loadMore"
+            @click="increasePageHandler"
+        >
+            Загрузить еще
+        </AppBaseButton>
         <AppNotFound v-if="isEmptyData"> Квартиры не найдены </AppNotFound>
     </div>
 </template>

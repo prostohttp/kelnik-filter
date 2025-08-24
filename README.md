@@ -6,4 +6,4 @@
 3) Установить зависимости - **npm install**
 4) Запустить сборку проекта - **npm run build**
 5) Запустить проект - **node .output/server/index.mjs**
-6) Открыть сайт проект в браузере [Kelnik filter app](http://localhost:3000)
+6) Открыть проект в браузере [Kelnik filter app](http://localhost:3000)
