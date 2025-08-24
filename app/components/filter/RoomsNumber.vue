@@ -1,9 +1,12 @@
 <script setup lang="ts">
-
 const route = useRoute();
 const filterStore = useFilterStore();
-const uniqueRooms = await filterStore.uniqueRooms();
-const isValidRoomNumber = (room: number) => uniqueRooms.includes(room);
+const rooms = await filterStore.uniqueRooms();
+
+const { prices, areas, apartmentsWithActiveRooms } = storeToRefs(filterStore);
+await useAsyncData(() =>
+    filterStore.setApartmentsWithActiveRooms(prices.value!, areas.value!),
+);
 
 const checkHandler = useDebounceFn((room: number) => {
     filterStore.setRooms(room);
@@ -12,8 +15,17 @@ const checkHandler = useDebounceFn((room: number) => {
             ...route.query,
             room: JSON.stringify(filterStore.rooms),
         },
+        force: true,
     });
 });
+
+watch([prices, areas], ([newPrice, newArea]) => {
+    filterStore.setApartmentsWithActiveRooms(newPrice!, newArea!);
+});
+
+const disabledRoom = (room: number) => {
+    return !uniqueRooms(apartmentsWithActiveRooms.value!).includes(room);
+};
 
 onMounted(() => {
     const roomQuery = route.query.room as string;
@@ -22,7 +34,7 @@ onMounted(() => {
             const roomArray = safeParseArray(roomQuery);
             if (Array.isArray(roomArray)) {
                 roomArray.forEach((room) => {
-                    if (uniqueRooms.includes(room)) {
+                    if (rooms.includes(room)) {
                         filterStore.setRooms(room);
                     }
                 });
@@ -41,18 +53,20 @@ onMounted(() => {
 <template>
     <div class="rooms">
         <button
-            v-for="room in uniqueRooms"
+            v-for="room in rooms"
             :key="room"
             type="button"
             class="circle-button"
             :class="{
-                'circle-button-active': filterStore.rooms?.includes(room),
-                'circle-button-disabled': !isValidRoomNumber(room),
+                'circle-button-active':
+                    filterStore.rooms?.includes(room),
+                'circle-button-disabled': disabledRoom(room),
             }"
-            :disabled="!isValidRoomNumber(room)"
+            :disabled="disabledRoom(room)"
             @click="checkHandler(room)"
         >
             {{ room }}к
         </button>
     </div>
+    <pre>{{ filterStore.apartmentsWithActiveRooms.length }}</pre>
 </template>

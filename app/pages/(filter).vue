@@ -13,14 +13,14 @@ const { data, isLoading, isPending } = useQuery({
         route.query.price as string,
         route.query.area as string,
     ],
-    query: async () =>
-        await $fetch<Data>("/api/apartments", {
+    query: async () => {
+        return await $fetch<Data>("/api/apartments", {
             query: {
                 ...route.query,
             },
-        }),
+        });
+    },
     placeholderData: (data) => data,
-    enabled: import.meta.client,
 });
 </script>
 
@@ -31,8 +31,7 @@ const { data, isLoading, isPending } = useQuery({
             <ApartmentsList v-model="data" :is-loading :is-pending />
         </div>
         <div class="sidebar">
-            <Filter :is-loading :is-pending />
+            <Filter />
         </div>
     </div>
-    <!-- <pre>{{ data?.items }}</pre> -->
 </template>

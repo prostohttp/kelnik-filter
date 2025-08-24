@@ -10,6 +10,7 @@ export default defineEventHandler(async (event) => {
     const limit = Number(query.limit) || LIMIT;
     const sort = query.sort as string;
     const order = query.order as Order;
+    const all = query.all as boolean;
 
     const rooms = query.room as string;
     const prices = query.price as string;
@@ -19,9 +20,8 @@ export default defineEventHandler(async (event) => {
 
     if (rooms) {
         const roomsArray = safeParseArray(rooms);
-        if(roomsArray && roomsArray.length) {
+        if (roomsArray && roomsArray.length) {
             data = data.filter((el) => roomsArray?.includes(el.rooms));
-        } else {;
         }
     }
 
@@ -44,6 +44,10 @@ export default defineEventHandler(async (event) => {
         }
     }
 
+    if (all) {
+        return data;
+    }
+
     switch (sort) {
         case Sort.AREA:
             data = sortBy(data, "area", order);
@@ -56,8 +60,8 @@ export default defineEventHandler(async (event) => {
             break;
     }
 
-    // await new Promise((resolve) => setTimeout(resolve, 1000));
-    const totalPages = Math.ceil( data.length / Number(limit));
+    const totalPages = Math.ceil(data.length / Number(limit));
     data = data.slice(0, limit * page);
-    return {items: data, totalPages};
+
+    return { items: data, totalPages };
 });

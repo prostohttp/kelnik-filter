@@ -1,14 +1,10 @@
 <script setup lang="ts">
 
 const route = useRoute();
-defineProps<{
-    isLoading: boolean;
-    isPending: boolean;
-}>();
-
 const filterStore = useFilterStore();
+const { rooms, prices, areas } = storeToRefs(filterStore);
 const isActiveFilters = computed(
-    () => filterStore.rooms || filterStore.prices || filterStore.areas,
+    () => rooms.value || prices.value || areas.value,
 );
 
 const resetFiltersHandler = async () => {

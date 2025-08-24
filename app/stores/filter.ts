@@ -1,4 +1,6 @@
-import type { SliderData } from "~/types";
+import type { Apartment, SliderData } from "~/types";
+import { uniqueRooms as uniqueRoomsHandler } from "~/utils/uniqueRooms";
+import { minMaxFrom } from "~/utils/minmax";
 
 export const useFilterStore = defineStore("filter", () => {
     const rooms = ref<number[]>();
@@ -14,11 +16,24 @@ export const useFilterStore = defineStore("filter", () => {
         }
     };
     const uniqueRooms = async () => {
-        return await $fetch<number[]>("/api/filter", {
+        const data = await $fetch<Apartment[]>("/api/apartments", {
             query: {
-                filter: "room",
+                all: true,
             },
         });
+        return uniqueRoomsHandler(data);
+    };
+
+    const apartmentsWithActiveRooms = ref<Apartment[]>([]);
+    const setApartmentsWithActiveRooms = async (prices: SliderData, areas: SliderData) => {
+        const data = await $fetch<Apartment[]>("/api/apartments", {
+            query: {
+                all: true,
+                price: JSON.stringify(prices),
+                area: JSON.stringify(areas),
+            },
+        });
+        apartmentsWithActiveRooms.value = data;
     };
 
     const prices = ref<SliderData>();
@@ -26,11 +41,12 @@ export const useFilterStore = defineStore("filter", () => {
         prices.value = [numberFrom(data[0]), numberFrom(data[1])];
     };
     const minMaxPrices = async () => {
-        return await $fetch<SliderData>("/api/filter", {
+        const data = await $fetch<Apartment[]>("/api/apartments", {
             query: {
-                filter: "price",
+                all: true,
             },
         });
+        return minMaxFrom(data, "price");
     };
 
     const areas = ref<SliderData>();
@@ -38,11 +54,12 @@ export const useFilterStore = defineStore("filter", () => {
         areas.value = [numberFrom(data[0]), numberFrom(data[1])];
     };
     const minMaxAreas = async () => {
-        return await $fetch<SliderData>("/api/filter", {
+        const data = await $fetch<Apartment[]>("/api/apartments", {
             query: {
-                filter: "area",
+                all: true,
             },
         });
+        return minMaxFrom(data, "area");
     };
 
     const clearFilters = () => {
@@ -55,6 +72,8 @@ export const useFilterStore = defineStore("filter", () => {
         rooms,
         setRooms,
         uniqueRooms,
+        apartmentsWithActiveRooms,
+        setApartmentsWithActiveRooms,
         prices,
         setPrices,
         minMaxPrices,

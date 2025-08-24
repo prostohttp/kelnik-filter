@@ -21,13 +21,6 @@ export default defineNuxtConfig({
             },
         },
     },
-    $production: {
-        nitro: {
-            storage: {
-                data: { driver: "vercelKV" },
-            },
-        },
-    },
     devtools: { enabled: true },
     modules: [
         "@nuxt/eslint",

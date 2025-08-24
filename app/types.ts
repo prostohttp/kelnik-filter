@@ -32,6 +32,12 @@ export interface SortItem {
     order?: Order;
     class?: string;
 }
+export interface ActiveRoom {
+    room: number;
+    active: boolean;
+}
+
+export type FilterTypes = "price" | "area" | "rooms";
 
 export type SliderData = [number, number];
 
