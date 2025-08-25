@@ -10,7 +10,7 @@ export default defineEventHandler(async (event) => {
     const limit = Number(query.limit) || LIMIT;
     const sort = query.sort as string;
     const order = query.order as Order;
-    const all = query.all as boolean;
+    const all = query.all as string;
 
     const rooms = query.room as string;
     const prices = query.price as string;
@@ -44,7 +44,7 @@ export default defineEventHandler(async (event) => {
         }
     }
 
-    if (all) {
+    if (all === "true") {
         return data;
     }
 

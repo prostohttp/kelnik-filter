@@ -15,7 +15,6 @@ onMounted(() => {
         try {
             const priceArray = safeParseArray(priceQuery);
             if (priceArray) {
-                priceArray.length = 2;
                 const min = model.value[0];
                 const max = model.value[1];
 

@@ -16,7 +16,6 @@ onMounted(() => {
         try {
             const areaArray = safeParseArray(areaQuery);
             if (areaArray) {
-                areaArray.length = 2;
                 const min = model.value[0];
                 const max = model.value[1];
 
