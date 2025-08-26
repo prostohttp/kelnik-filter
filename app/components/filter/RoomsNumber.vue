@@ -4,7 +4,7 @@ const filterStore = useFilterStore();
 const rooms = await filterStore.uniqueRooms();
 
 const { prices, areas, apartmentsWithActiveRooms } = storeToRefs(filterStore);
-await useAsyncData(() =>
+await callOnce(() =>
     filterStore.setApartmentsWithActiveRooms(prices.value!, areas.value!),
 );
 
@@ -58,8 +58,7 @@ onMounted(() => {
             type="button"
             class="circle-button"
             :class="{
-                'circle-button-active':
-                    filterStore.rooms?.includes(room),
+                'circle-button-active': filterStore.rooms?.includes(room),
                 'circle-button-disabled': disabledRoom(room),
             }"
             :disabled="disabledRoom(room)"
