@@ -30,7 +30,10 @@ export default defineEventHandler(async (event) => {
         if (Array.isArray(pricesArray)) {
             data = data.filter(
                 (el) =>
-                    el.price >= pricesArray[0] && el.price <= pricesArray[1],
+                    pricesArray[0] &&
+                    pricesArray[1] &&
+                    el.price >= pricesArray[0] &&
+                    el.price <= pricesArray[1],
             );
         }
     }
@@ -39,7 +42,11 @@ export default defineEventHandler(async (event) => {
         const areasArray = safeParseArray(areas);
         if (Array.isArray(areasArray)) {
             data = data.filter(
-                (el) => el.area >= areasArray[0] && el.area <= areasArray[1],
+                (el) =>
+                    areasArray[0] &&
+                    areasArray[1] &&
+                    el.area >= areasArray[0] &&
+                    el.area <= areasArray[1],
             );
         }
     }
