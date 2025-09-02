@@ -1,5 +1,4 @@
 <script setup lang="ts">
-
 const route = useRoute();
 const filterStore = useFilterStore();
 const { rooms, prices, areas } = storeToRefs(filterStore);
@@ -27,10 +26,9 @@ const resetFiltersHandler = async () => {
             <FilterApartmentPrice />
             <FilterApartmentArea />
             <div v-if="isActiveFilters">
-                <AppClearDataButton
-                    text="Сбросить параметры"
-                    @clear-data="resetFiltersHandler"
-                />
+                <AppClearDataButton @clear-data="resetFiltersHandler">
+                    Сбросить параметры
+                </AppClearDataButton>
             </div>
         </form>
     </div>

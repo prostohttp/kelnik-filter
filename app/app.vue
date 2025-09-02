@@ -6,8 +6,8 @@ import { PiniaColadaDevtools } from "@pinia/colada-devtools";
         <NuxtRouteAnnouncer />
         <PiniaColadaDevtools />
         <NuxtLayout>
+            <NuxtPage />
             <ClientOnly>
-                <NuxtPage />
                 <template #fallback>
                     <AppPreloader />
                 </template>

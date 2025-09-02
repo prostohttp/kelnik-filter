@@ -30,8 +30,10 @@ const sliderRef = useTemplateRef("slider") as Readonly<ShallowRef<IVueSlider>>;
 watch(
     () => [model.value![0], model.value![1]],
     ([dataFromNew, dataToNew]) => {
-        dataFrom.value = dataFromNew!;
-        dataTo.value = dataToNew!;
+        if (dataFromNew && dataToNew) {
+            dataFrom.value = dataFromNew;
+            dataTo.value = dataToNew;
+        }
     },
 );
 

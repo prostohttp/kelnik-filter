@@ -2,14 +2,11 @@
 const emit = defineEmits<{
     clearData: [];
 }>();
-defineProps<{
-    text: string;
-}>();
 </script>
 
 <template>
     <button class="clear-button" type="button" @click="emit('clearData')">
-        <span>{{ text }}</span>
+        <span><slot/></span>
         <svg
             width="8"
             height="8"
