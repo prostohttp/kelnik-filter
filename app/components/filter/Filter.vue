@@ -21,15 +21,20 @@ const resetFiltersHandler = async () => {
 
 <template>
     <div class="filter">
-        <form class="filter__form" @submit.prevent>
-            <FilterRoomsNumber />
-            <FilterApartmentPrice />
-            <FilterApartmentArea />
-            <div v-if="isActiveFilters">
-                <AppClearDataButton @clear-data="resetFiltersHandler">
-                    Сбросить параметры
-                </AppClearDataButton>
-            </div>
-        </form>
+        <ClientOnly>
+            <form class="filter__form" @submit.prevent>
+                <FilterRoomsNumber />
+                <FilterApartmentPrice />
+                <FilterApartmentArea />
+                <div v-if="isActiveFilters">
+                    <AppClearDataButton @clear-data="resetFiltersHandler">
+                        Сбросить параметры
+                    </AppClearDataButton>
+                </div>
+            </form>
+            <template #fallback>
+                <AppPreloader />
+            </template>
+        </ClientOnly>
     </div>
 </template>
