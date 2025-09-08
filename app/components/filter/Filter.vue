@@ -32,9 +32,6 @@ const resetFiltersHandler = async () => {
                     </AppClearDataButton>
                 </div>
             </form>
-            <template #fallback>
-                <AppPreloader />
-            </template>
         </ClientOnly>
     </div>
 </template>

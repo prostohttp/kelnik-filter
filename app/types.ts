@@ -1,5 +1,5 @@
 export interface Apartment {
-    id: string;
+    id: number;
     apartmentNumber: number;
     image?: string;
     title: string;

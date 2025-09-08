@@ -1,8 +1,9 @@
-import type { Apartment, Order } from "~/types";
+import type { Order } from "~/types";
 import { Sort } from "~/types";
 import { LIMIT, PAGE } from "~/constants";
 import { sortBy } from "~/utils/sortBy";
 import { safeParseArray } from "~/utils/parseArray";
+import { apartments } from "~~/.data/data";
 
 export default defineEventHandler(async (event) => {
     const query = getQuery(event);
@@ -16,7 +17,7 @@ export default defineEventHandler(async (event) => {
     const prices = query.price as string;
     const areas = query.area as string;
 
-    let data = (await useStorage("db").getItem("data.json")) as Apartment[];
+    let data = apartments;
 
     if (rooms) {
         const roomsArray = safeParseArray(rooms);
