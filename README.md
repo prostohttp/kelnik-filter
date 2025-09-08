@@ -1,5 +1,7 @@
 # Kelnik filter
 Тестовое задание на позицию Middle Frontend Developer (vue)
+
+[kelnik-filter.vercel.app](https://kelnik-filter.vercel.app/)
 ## Запуск приложения
 1) Скачать репозиторий проекта
 2) Открыть папку проекта в редакторе
