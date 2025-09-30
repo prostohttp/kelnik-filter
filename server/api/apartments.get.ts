@@ -53,7 +53,11 @@ export default defineEventHandler(async (event) => {
     }
 
     if (all === "true") {
-        return data;
+        return data.map(el => ({
+            area: el.area,
+            price: el.price,
+            rooms: el.rooms,
+        }));
     }
 
     switch (sort) {

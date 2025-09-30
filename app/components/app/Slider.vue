@@ -5,6 +5,7 @@ import "vue-slider-component/dist-css/vue-slider-component.css";
 import "vue-slider-component/theme/default.css";
 import type { SliderData } from "~/types";
 import type { MaskaDetail } from "maska";
+import { DEBOUNCE_TIME } from "~/constants";
 
 interface IVueSlider {
     setValue: (a: [number, number]) => void;
@@ -79,9 +80,9 @@ const maskaToHandler = (event: CustomEvent<MaskaDetail>) => {
     dataTo.value = Number(unmasked);
 };
 
-const setState = () => {
+const setState = useDebounceFn(() => {
     emit("setState");
-};
+}, DEBOUNCE_TIME);
 </script>
 
 <template>

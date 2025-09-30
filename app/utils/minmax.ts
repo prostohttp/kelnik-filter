@@ -1,8 +1,8 @@
-import type { Apartment } from "~/types";
+import type { ApartmentForFilter } from "~/types";
 import { sortFrom } from "~/utils/sort";
 
 export const minMaxFrom = (
-    data: Apartment[],
+    data: ApartmentForFilter[],
     key: "area" | "price",
 ): [number, number] => {
     let areaPrice: number[] = [];

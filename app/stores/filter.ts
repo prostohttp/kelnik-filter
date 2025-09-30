@@ -1,4 +1,4 @@
-import type { Apartment, SliderData } from "~/types";
+import type { ApartmentForFilter, SliderData } from "~/types";
 import { uniqueRooms as uniqueRoomsHandler } from "~/utils/uniqueRooms";
 import { minMaxFrom } from "~/utils/minmax";
 
@@ -16,7 +16,7 @@ export const useFilterStore = defineStore("filter", () => {
         }
     };
     const uniqueRooms = async () => {
-        const data = await $fetch<Apartment[]>("/api/apartments", {
+        const data = await $fetch<ApartmentForFilter[]>("/api/apartments", {
             query: {
                 all: true,
             },
@@ -24,9 +24,9 @@ export const useFilterStore = defineStore("filter", () => {
         return uniqueRoomsHandler(data);
     };
 
-    const apartmentsWithActiveRooms = ref<Apartment[]>([]);
+    const apartmentsWithActiveRooms = ref<ApartmentForFilter[]>([]);
     const setApartmentsWithActiveRooms = async (prices: SliderData, areas: SliderData) => {
-        const data = await $fetch<Apartment[]>("/api/apartments", {
+        const data = await $fetch<ApartmentForFilter[]>("/api/apartments", {
             query: {
                 all: true,
                 price: JSON.stringify(prices),
@@ -41,7 +41,7 @@ export const useFilterStore = defineStore("filter", () => {
         prices.value = [numberFrom(data[0]), numberFrom(data[1])];
     };
     const minMaxPrices = async () => {
-        const data = await $fetch<Apartment[]>("/api/apartments", {
+        const data = await $fetch<ApartmentForFilter[]>("/api/apartments", {
             query: {
                 all: true,
             },
@@ -54,7 +54,7 @@ export const useFilterStore = defineStore("filter", () => {
         areas.value = [numberFrom(data[0]), numberFrom(data[1])];
     };
     const minMaxAreas = async () => {
-        const data = await $fetch<Apartment[]>("/api/apartments", {
+        const data = await $fetch<ApartmentForFilter[]>("/api/apartments", {
             query: {
                 all: true,
             },
@@ -66,6 +66,7 @@ export const useFilterStore = defineStore("filter", () => {
         rooms.value = undefined;
         prices.value = undefined;
         areas.value = undefined;
+
     };
 
     return {

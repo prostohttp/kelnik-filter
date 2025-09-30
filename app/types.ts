@@ -10,6 +10,12 @@ export interface Apartment {
     totalFloors: number;
 }
 
+export interface ApartmentForFilter {
+    area: number;
+    price: number;
+    rooms: number;
+}
+
 export interface Data {
     items: Apartment[];
     totalPages: number;
